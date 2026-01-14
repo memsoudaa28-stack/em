@@ -5,170 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pour Emal ❤️</title>
     <style>
-        /* --- DESIGN GÉNÉRAL --- */
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap');
+        /* --- DESIGN STYLE 1 : GLASSMORPHISM (CORRECTION MOBILE) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
 
         :root {
-            --primary-color: #e84393;
-            --text-color: #2d3436;
+            --primary-color: #fff;
+            --accent-color: #ff007f;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            min-height: 100%; /* Important pour le scroll sur mobile */
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-color);
+            min-height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
             overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
         }
 
-        /* --- ARRIÈRE-PLAN (IMAGE) --- */
-        body {
-            /* Remplace 'image_amal.jpg' par le nom de ton fichier si différent */
-            background: url('image_amal.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        /* Calque flou pour rendre le texte lisible */
+        /* --- ARRIÈRE-PLAN FIXE (MÉTHODE ROBUSTE MOBILE) --- */
+        /* On utilise un pseudo-élément en position: fixed au lieu de background-attachment: fixed */
         body::before {
             content: "";
-            position: absolute;
+            position: fixed; /* C'est le secret pour que ça marche sur mobile */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 245, 247, 0.7); /* Voile rosé */
-            backdrop-filter: blur(0px); /* Flou */
-            z-index: -1;
+            
+            /* L'IMAGE DE FOND EST ICI */
+            background: url('img1.JPG') no-repeat center center;
+            background-size: cover;
+            
+            /* Filtres pour assombrir l'image et la flouter légèrement */
+            filter: brightness(0.5) blur(2px);
+            z-index: -10; /* Tout au fond */
+            transform: scale(1.1); /* Évite les bords blancs dus au flou */
         }
 
         /* --- CONTENEUR --- */
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
+            /* Effet verre */
+            background: rgba(255, 255, 255, 0.12);
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 600px;
-            width: 90%;
-            z-index: 10;
-            position: relative;
-            border: 2px solid #ffeef0;
-            margin: 20px 0;
-        }
-
-        /* --- TYPOGRAPHIE --- */
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            margin-top: 0;
-        }
-
-        p.intro {
-            font-size: 1.1rem;
-            color: #636e72;
-            margin-bottom: 30px;
-        }
-
-        /* --- STYLE DES ÉLÉMENTS AJOUTÉS (MANQUANT DANS TON CODE) --- */
-        .funny-quote {
-            font-weight: 600;
-            font-style: italic;
-            color: #d63031;
-            background-color: #ffeaa7;
-            padding: 15px;
-            border-radius: 10px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            
+            max-width: 500px;
+            width: 85%; /* Un peu plus large sur mobile */
+            margin: 20px auto;
             text-align: center;
-            margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1; /* Au dessus de l'image */
         }
 
-        .funny-gif {
-            max-width: 100%;
-            border-radius: 15px;
-            margin: 15px auto;
-            display: block;
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-top: 0;
+            margin-bottom: 10px;
         }
 
-        .small-gif {
-            max-width: 200px;
-        }
+        p { color: #f0f0f0; font-size: 0.95rem; }
+        
+        .intro { font-size: 1.1rem; color: #ddd; font-style: italic; margin-bottom: 20px; }
 
-        .user-image {
-            max-width: 180px;
-            border-radius: 10px;
-            margin: 20px auto 0 auto;
-            display: block;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: rotate(-3deg);
-        }
-
-        /* --- LA LETTRE CACHÉE --- */
-        .letter-content {
-            display: none;
-            text-align: left;
-            margin-top: 20px;
-            line-height: 1.6;
-            font-size: 1rem;
-            border-top: 1px dashed #fab1a0;
-            padding-top: 20px;
-            animation: fadeIn 1s ease-in;
-        }
-
-        .highlight {
-            font-weight: 600;
-            color: var(--primary-color);
+        .funny-quote {
+            background: #ffeaa7;
+            color: #d35400;
+            transform: rotate(-2deg);
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+            margin: 25px 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
         }
 
         /* --- BOUTON --- */
         button {
-            background-color: var(--primary-color);
-            color: white;
+            background: #fff;
+            color: #e84393;
             border: none;
-            padding: 15px 30px;
+            padding: 12px 30px;
             font-size: 1rem;
             border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(232, 67, 147, 0.4);
-            background-color: #d63083;
+            transform: scale(1.05);
+            background: #ffebf5;
+        }
+
+        /* --- CONTENU LETTRE --- */
+        .letter-content {
+            display: none;
+            background: rgba(0,0,0,0.4); 
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .letter-content p {
+            margin: 12px 0;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            color: #ffeaa7;
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 234, 167, 0.5);
+        }
+
+        .funny-gif, .user-image {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .small-gif { max-width: 140px; }
+        
+        .user-image {
+            max-width: 160px;
+            border: 3px solid rgba(255,255,255,0.6);
+            transform: rotate(-3deg);
         }
 
         /* --- ANIMATION PLUIE --- */
         .falling-item {
             position: fixed;
-            color: #ff7675;
-            opacity: 0;
             top: -10vh;
             animation: fall linear forwards;
-            font-size: 20px;
             z-index: 100;
             pointer-events: none;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0.7;
-            }
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -180,60 +179,53 @@
 
     <div class="container">
         <h1>Emaliii...</h1>
-       <img src="img.JPG" alt="Funny sheep eating" class="funny-gif small-gif">
+       <img src="img.JPG" alt="Funny sheep" class="funny-gif small-gif">
         <p class="intro">last time</p>
         
         <button onclick="revealLetter()">Lire mon message 💌</button>
 
         <div class="letter-content" id="letter">
-            <p>Emali,</p>
-            <p>nveg3i yelli nehwak ... 7atte mebya8 klak</p>
-            <p>gouli 3nk ma9lak ... menveg3a bik w bik <p>
-            <p>nveg3i me5alak ... 3andk ane nra8ik <p>
+            <p style="font-style: italic;">"nveg3i yelli nehwak ... 7atte mebya8 klak"</p>
+            <p style="font-style: italic;">"gouli 3nk ma9lak ... menveg3a bik w bik"</p>
+            <p style="font-style: italic;">"nveg3i me5alak ... 3andk ane nra8ik"</p>
             
-           
+            <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.4); margin: 20px auto; width: 60%;">
             
-            <p><span class="highlight">Je te fais une promesse aujourd'hui :</span> mateyt lahi n3ud kiv ma knt w nchangi kelchi w je travaille sur moi-même pour devenir l'homme que tu mérites.</p>
+            <p><span class="highlight">Dorini ne9ne6 9er mani </span>Rani je travaille sur moi-même pour devenir l'homme que tu mérites.</p>
             
-            <p>36ini chance neprouvihlk mahou b les mots mais par mes actions</p>
+            <p>36ini chance neprouvihlk mahou b les mots 9er b les actions</p>
 
              <div class="funny-quote">
                 "emali ye 3az lne5ter gayelhe w bla je7dan ne5terk 3an mbourou beurre w 3an l5ervan" 🐑🍖
             </div>
 
-            
             <img src="img1.JPG" alt="Hug" class="funny-gif small-gif">
 
-            <p style="text-align: right; margin-top: 30px; font-style: italic;">Je t'attends<br>yacoub</p>
+            <p style="text-align: right; margin-top: 30px; font-style: italic; font-weight: bold;">Je t'attends<br>yacoub</p>
             
             <img src="image_amal.jpg" alt="Carte Amal" class="user-image">
         </div>
     </div>
 
     <script>
-        // Fonction pour afficher la lettre
         function revealLetter() {
             const letter = document.getElementById('letter');
             const btn = document.querySelector('button');
             const intro = document.querySelector('.intro');
-            const firstGif = document.querySelector('.container > img'); // Le premier gif
+            const firstGif = document.querySelector('.container > img'); 
             
             letter.style.display = 'block';
             btn.style.display = 'none'; 
             intro.style.display = 'none';
-            if(firstGif) firstGif.style.display = 'none'; // On cache le gif du début pour faire de la place
+            if(firstGif) firstGif.style.display = 'none'; 
             
-            // Scroll vers la lettre
             letter.scrollIntoView({ behavior: 'smooth' });
-
-            // Lancer la pluie
             createFallingItems();
         }
 
-        // Fonction pour créer la pluie (coeurs et moutons)
         function createFallingItems() {
             const container = document.getElementById('falling-container');
-            const emojis = ['❤️', '💖', '🐑', '🐑', '💕']; // Moutons + Coeurs
+            const emojis = ['❤️', '💖', '🐑', '🐑', '💕']; 
 
             for(let i = 0; i < 40; i++) {
                 setTimeout(() => {
@@ -244,12 +236,10 @@
                     item.style.animationDuration = Math.random() * 2 + 3 + 's';
                     item.style.fontSize = Math.random() * 20 + 15 + 'px';
                     
-                    // Les moutons un peu plus gros
                     if(item.innerHTML === '🐑') item.style.fontSize = '30px';
 
                     document.body.appendChild(item);
                     
-                    // Nettoyage après l'animation
                     setTimeout(() => {
                         item.remove();
                     }, 5000);
