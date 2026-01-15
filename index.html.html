@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pour Emal ❤️</title>
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
@@ -15,6 +14,7 @@
             --accent-soft: #ff8fb7;
             --bg-dark: #050815;
             --gold: #ffd700;
+            --success: #00b894;
         }
 
         * {
@@ -28,10 +28,10 @@
             font-family: 'Poppins', sans-serif;
             color: #fff;
             overflow-x: hidden;
-            touch-action: manipulation; /* Mobile fix */
+            touch-action: manipulation;
         }
 
-        /* Fond - OPTIMISÉ MOBILE */
+        /* Fond */
         body {
             background: radial-gradient(circle at top, #ff6aa5 0, transparent 55%),
                         radial-gradient(circle at bottom, #5b4bff 0, #050815 60%);
@@ -66,7 +66,7 @@
             z-index: -1;
         }
 
-        /* Conteneur - MOBILE FIRST */
+        /* Conteneur */
         .container {
             background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
             padding: 24px 18px 22px;
@@ -156,7 +156,7 @@
             transform-origin: center;
         }
 
-        /* Boutons - MOBILE OPTIMISÉ */
+        /* Boutons */
         .main-button, .shop-button, .buy-heart-btn {
             background: linear-gradient(135deg, #ffffff, #ffe5f1);
             color: #e84393;
@@ -188,12 +188,19 @@
             margin-top: 25px;
         }
 
+        .buy-heart-btn {
+            background: linear-gradient(135deg, #00b894, #55efc4);
+            color: #fff;
+            box-shadow: 0 12px 30px rgba(0, 184, 148, 0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
         .main-button:hover, .shop-button:hover, .buy-heart-btn:hover {
             transform: translateY(-1px) scale(1.02);
             box-shadow: 0 18px 40px rgba(0,0,0,0.55), 0 0 18px rgba(255,255,255,0.75);
         }
 
-        /* Panier - POSITION MOBILE FIX */
+        /* Panier */
         .cart {
             position: fixed;
             top: 20px;
@@ -257,11 +264,13 @@
             text-shadow: 0 0 15px rgba(255,215,0,0.6);
         }
 
+        /* Cœur dans la boutique (MODIFIÉ: Il ne casse plus, il bat) */
         .heart-sale {
             width: clamp(70px, 20vw, 80px);
             height: clamp(60px, 18vw, 70px);
             margin: clamp(10px, 4vw, 15px) auto;
             position: relative;
+            animation: heartbeat 1.5s infinite; /* Animation de battement */
         }
 
         .heart-sale::before,
@@ -280,17 +289,10 @@
 
         .heart-sale::before {
             transform: translateX(-55%) rotate(-45deg);
-            animation: sale-crack 2s ease-in-out infinite;
         }
 
         .heart-sale::after {
             transform: translateX(35%) rotate(45deg);
-            animation: sale-crack 2s ease-in-out infinite reverse;
-        }
-
-        @keyframes sale-crack {
-            0%, 50% { transform: translateX(-55%) rotate(-45deg) scale(1); }
-            25% { transform: translateX(-60%) rotate(-47deg) scale(1.05); }
         }
 
         .sale-price {
@@ -301,7 +303,7 @@
             text-shadow: 0 0 10px rgba(255,215,0,0.5);
         }
 
-        /* Lettre - SCROLL MOBILE */
+        /* Lettre */
         .letter-content {
             display: none;
             background: radial-gradient(circle at top, rgba(0,0,0,0.45), rgba(0,0,0,0.7));
@@ -320,7 +322,7 @@
             animation: fade-up 0.75s ease-out;
         }
 
-        /* Images responsive */
+        /* Images */
         .funny-gif, .user-image {
             max-width: 100%;
             height: auto;
@@ -337,20 +339,21 @@
             border-radius: 999px; 
         }
 
-        /* Popup notification - MOBILE CENTER */
+        /* Popup notification - MODIFIÉ (Positif) */
         .broken-popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background: linear-gradient(135deg, #ff4b5c, #ff2b85);
+            /* Gradient Vert/Heureux */
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
             padding: clamp(20px, 12vw, 25px) clamp(18px, 8vw, 20px);
             border-radius: 20px;
             font-size: clamp(1rem, 4.5vw, 1.1rem);
             font-weight: 600;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(255,75,92,0.5);
+            box-shadow: 0 20px 60px rgba(46, 204, 113, 0.5);
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 1001;
@@ -367,10 +370,10 @@
             font-size: clamp(3rem, 15vw, 4rem);
             display: block;
             margin-bottom: clamp(8px, 4vw, 12px);
-            animation: shake 0.6s ease-in-out;
+            animation: heartbeat 1s infinite;
         }
 
-        /* ANIMATIONS OPTIMISÉES MOBILE */
+        /* ANIMATIONS */
         @keyframes typing { from { width: 0; } to { width: 100%; } }
         @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: rgba(255,255,255,0.8); } }
         @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
@@ -379,7 +382,6 @@
         @keyframes float-dot { 0% { transform: translateY(0) translateX(0); opacity: 0.4; } 50% { transform: translateY(-12px) translateX(8px); opacity: 0.9; } 100% { transform: translateY(4px) translateX(-6px); opacity: 0.3; } }
         @keyframes pulse-glow { 0% { transform: scale(0.9); opacity: 0.6; } 100% { transform: scale(1.05); opacity: 0.9; } }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes shake { 0%, 100% { transform: translateX(0) rotate(0); } 20% { transform: translateX(-10px) rotate(-3deg); } 40% { transform: translateX(10px) rotate(3deg); } 60% { transform: translateX(-4px) rotate(-1deg); } 80% { transform: translateX(4px) rotate(1deg); } }
 
         /* MOBILE SPECIFIC */
         @media (max-width: 480px) {
@@ -414,17 +416,15 @@
     <div class="glow-orb"></div>
     <div id="falling-container"></div>
 
-    <!-- Panier -->
     <div class="cart" id="cart">
         <div id="cart-count" class="cart-count">0</div>🛒
     </div>
 
-    <!-- Notification -->
     <div id="broken-popup" class="broken-popup">
-        <div class="broken-emoji">💔</div>
-        <strong>ATTENTION !</strong><br>
-        Ce cœur est <strong>BRISÉ</strong><br>
-        matle nave3 w latle vem😢 w moulah mrag 7aytek
+        <div class="broken-emoji">💖</div>
+        <strong>C'EST FAIT !</strong><br>
+        Ce cœur est <strong>POUR TOI</strong><br>
+        la lek w a 100% ❤️
     </div>
 
     <div class="container">
@@ -441,18 +441,17 @@
 
         <img src="img.JPG" alt="Funny sheep" class="funny-gif small-gif">
 
-        <p class="intro">knt ndor last chance</p>
+        <p class="intro"> ndor last chance</p>
 
         <div class="heart-wrapper">
-            <div class="heart-beat heart-broken"></div>
+            <div class="heart-beat heart-broken" style="animation: heartbeat 2s infinite;"></div>
             <div class="heart-beat heart-fixed"></div>
         </div>
 
         <button class="main-button" onclick="revealLetter()">
-            <span>clique 💌</span>
+            <span>9emzi b4ak sbey3 zeyn 💌</span>
         </button>
 
-        <!-- LETTRE ORIGINALE -->
         <div class="letter-content" id="letter">
             <p style="font-style: italic;">"nveg3i yelli nehwak ... 7atte mebya8 klak"</p>
             <p style="font-style: italic;">"gouli 3nk ma9lak ... menveg3a bik w bik"</p>
@@ -460,12 +459,12 @@
 
             <hr>
 
-            <p><span class="highlight" style="color: #ffeaa7; font-weight: 700; text-decoration: underline; text-decoration-color: rgba(255,234,167,0.75);">Dorini ne9ne6 w rahi 5elget </span></p>
-            <p>9er knt dorek t36ini chance neprouvilk b mes actions</p>
+            <p><span class="highlight" style="color: #ffeaa7; font-weight: 700; text-decoration: underline; text-decoration-color: rgba(255,234,167,0.75);">Dorini ne9ne6 w ane mouteyem bik </span></p>
+            <p>ndor menek une CHANCE wa7de la chance 3ageb l5e8lan kamel</p>
 
             <p style="margin-top:10px;">
-                je t'ai blessée w <span class="highlight">sem7ili ni insisteyt </span>... 
-                knt ndor nrépari chaque petit morceau de ton cœur doucement 
+                je t'ai blessée tellement w matesta7a9ihe ba6 <span class="highlight">sem7ili w sem7ili w sem7ili please </span>... 
+                 ndor l'opportunite nrépari chaque petit morceau de ton cœur doucement 
             </p>
 
             <p>ولربما انقطعت رسائلنا  ... ولربما انقطعت هدايانا</p>
@@ -478,29 +477,28 @@
             <img src="img1.JPG" alt="Hug" class="funny-gif small-gif">
 
             <p class="signature" style="text-align: right; margin-top: 22px; font-style: italic; font-weight: 600; position: relative; z-index: 1;">
-                 <br>yacoub
+                 <br>yacoub w neb9ik
             </p>
 
             <img src="image_amal.jpg" alt="Carte Amal" class="user-image">
 
             <button class="shop-button" onclick="showShop()" style="margin-top: 5px;">
-                🛒 Aller à la boutique
+                🎁 Mon Cadeau Pour Toi
             </button>
         </div>
 
-        <!-- Boutique -->
         <div class="shop-section" id="shop-section">
-            <h3 class="shop-title">nbi3 Galbi</h3>
+            <h3 class="shop-title">galbi la lek!!!!!</h3>
             
             <div class="heart-sale"></div>
             
-            <div class="sale-price">GRATUIT</div>
+            <div class="sale-price">POUR TOI</div>
             <p style="font-size: clamp(0.85rem, 3.5vw, 0.9rem); opacity: 0.9; margin: clamp(8px, 3vw, 10px) 0;">
-                Cœur sincère ...
+                Cœur sincère et bien réparé...
             </p>
             
-            <button class="buy-heart-btn" onclick="buyBrokenHeart()">
-                ➕ Ajouter au panier
+            <button class="buy-heart-btn" onclick="acceptHeart()">
+                ❤️ Accepter le cœur
             </button>
         </div>
     </div>
@@ -547,37 +545,47 @@
             }, 300);
         }
         
-        function buyBrokenHeart() {
-            playBrokenSound();
+        // Fonction modifiée pour accepter le cœur
+        function acceptHeart() {
+            playSuccessSound(); // Joue un son joyeux
             const popup = document.getElementById('broken-popup');
             if (popup) popup.classList.add('show');
-            cartCount = 0;
+            
+            // Mise à jour du panier à 1 (elle a pris le cœur)
+            cartCount = 1; 
             updateCartCount();
+            
             setTimeout(() => {
                 if (popup) popup.classList.remove('show');
             }, 4000);
         }
         
-        function playBrokenSound() {
+        // Son modifié : Joyeux (Ding!) au lieu de triste
+        function playSuccessSound() {
             if (!window.AudioContext) return;
             try {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
+                
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
-                oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(110, audioContext.currentTime + 0.15);
-                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
+                
+                // Fréquence qui monte (Joyeux)
+                oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // La
+                oscillator.frequency.exponentialRampToValueAtTime(880, audioContext.currentTime + 0.1); // Octave au-dessus
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
                 oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.25);
+                oscillator.stop(audioContext.currentTime + 0.5);
             } catch(e) {}
         }
         
         function createFallingItems(isApology = false) {
-            const emojis = isApology ? ['🙏','💔','💗','🥺','❤️','🌹'] : ['❤️','💖','🛒','💕','💘','✨'];
-            const total = 30; // Réduit pour mobile
+            const emojis = isApology ? ['🙏','💔','💗','🥺','❤️','🌹'] : ['❤️','💖','🥰','💕','💘','✨'];
+            const total = 30; 
             for (let i = 0; i < total; i++) {
                 setTimeout(() => {
                     const item = document.createElement('div');
@@ -596,9 +604,14 @@
         
         document.addEventListener('DOMContentLoaded', function() {
             updateCartCount();
+            // Panier modifié : Message positif
             document.getElementById('cart').onclick = function(e) {
                 e.preventDefault();
-                alert('💔 Panier vide!cœur matle nave3 lchi w matle vem g3😢');
+                if(cartCount > 0) {
+                     alert('💖 Le cœur est déjà à toi, Emal !');
+                } else {
+                     alert('Ton panier est vide... Accepte le cadeau en bas ! 👇');
+                }
             };
         });
     </script>
