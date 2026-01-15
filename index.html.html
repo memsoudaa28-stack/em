@@ -14,6 +14,7 @@
             --accent-color: #ff2b85;
             --accent-soft: #ff8fb7;
             --bg-dark: #050815;
+            --gold: #ffd700;
         }
 
         * {
@@ -23,38 +24,40 @@
         body, html {
             margin: 0;
             padding: 0;
-            min-height: 100%;
+            min-height: 100vh;
             font-family: 'Poppins', sans-serif;
             color: #fff;
             overflow-x: hidden;
+            touch-action: manipulation; /* Mobile fix */
         }
 
-        /* Fond dégradé + halo néon */
+        /* Fond - OPTIMISÉ MOBILE */
         body {
             background: radial-gradient(circle at top, #ff6aa5 0, transparent 55%),
                         radial-gradient(circle at bottom, #5b4bff 0, #050815 60%);
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 30px 15px;
+            padding: 20px 15px;
             position: relative;
         }
 
-        /* Aura lumineuse derrière la carte */
         .glow-orb {
             position: fixed;
             inset: 0;
             margin: auto;
-            width: 480px;
-            height: 480px;
+            width: min(90vw, 480px);
+            height: min(90vw, 480px);
             background: radial-gradient(circle, rgba(255, 43, 133, 0.45), transparent 65%);
             filter: blur(18px);
             opacity: 0.75;
             z-index: -2;
             animation: pulse-glow 6s ease-in-out infinite alternate;
+            will-change: transform;
         }
 
-        /* Film sombre subtil */
         body::before {
             content: "";
             position: fixed;
@@ -63,27 +66,26 @@
             z-index: -1;
         }
 
-        /* Conteneur principal */
+        /* Conteneur - MOBILE FIRST */
         .container {
             background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
-            padding: 28px 22px 26px;
+            padding: 24px 18px 22px;
             border-radius: 24px;
-            box-shadow:
-                0 18px 45px rgba(0,0,0,0.55),
-                0 0 0 1px rgba(255,255,255,0.08);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
             backdrop-filter: blur(14px) saturate(140%);
-            -webkit-backdrop-filter: blur(14px) saturate(140%);
             border: 1px solid rgba(255,255,255,0.18);
-            max-width: 480px;
+            max-width: min(95vw, 480px);
             width: 100%;
             text-align: center;
             position: relative;
             overflow: hidden;
             transform: translateY(10px);
             animation: card-in 0.9s ease-out forwards;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        /* Petites lumières flottantes */
+        /* Lumières flottantes */
         .floating-dot {
             position: absolute;
             width: 10px;
@@ -102,15 +104,15 @@
 
         h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 2.7rem;
+            font-size: clamp(2rem, 5vw, 2.7rem);
             color: #fff;
-            margin: 0 0 4px;
+            margin: 0 0 12px 0;
             letter-spacing: 1px;
             text-shadow: 0 6px 16px rgba(0,0,0,0.7);
             animation: fade-up 0.9s ease-out;
+            line-height: 1.1;
         }
 
-        /* Typewriter "Pardon" */
         .typewriter {
             position: relative;
             display: inline-block;
@@ -119,399 +121,313 @@
             border-right: 2px solid rgba(255,255,255,0.7);
             animation: typing 4s steps(40, end), blink-caret 0.7s step-end infinite;
             color: #ffe5ff;
-            font-size: 0.95rem;
+            font-size: clamp(0.85rem, 3vw, 0.95rem);
             margin-bottom: 16px;
-        }
-
-        .typewriter span {
-            display: inline-block;
-            padding-right: 6px;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to   { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: rgba(255,255,255,0.8); }
         }
 
         p {
             color: #f7f7f7;
-            font-size: 0.92rem;
+            font-size: clamp(0.85rem, 3vw, 0.92rem);
             line-height: 1.6;
             margin: 6px 0;
         }
 
         .intro {
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
             color: #f0e6ff;
             font-style: italic;
             margin-bottom: 18px;
         }
 
-        /* Cœur cassé -> guéri */
+        /* Cœur - RESPONSIF */
         .heart-wrapper {
             position: relative;
-            width: 50px;
-            height: 40px;
+            width: clamp(45px, 12vw, 50px);
+            height: clamp(36px, 10vw, 40px);
             margin: 6px auto 20px;
         }
 
         .heart-beat {
-            width: 42px;
-            height: 36px;
+            width: clamp(38px, 10vw, 42px);
+            height: clamp(32px, 9vw, 36px);
             position: absolute;
             inset: 0;
             margin: auto;
             transform-origin: center;
         }
 
-        /* Cœur cassé (avant) */
-        .heart-broken::before,
-        .heart-broken::after {
+        /* Boutons - MOBILE OPTIMISÉ */
+        .main-button, .shop-button, .buy-heart-btn {
+            background: linear-gradient(135deg, #ffffff, #ffe5f1);
+            color: #e84393;
+            border: none;
+            padding: clamp(10px, 4vw, 12px) clamp(25px, 8vw, 30px);
+            font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+            border-radius: 999px;
+            font-weight: 600;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.6);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin: 12px auto;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .shop-button {
+            background: linear-gradient(135deg, var(--gold), #ffed4a);
+            color: #e84393;
+            box-shadow: 0 12px 30px rgba(255,215,0,0.4), 0 0 0 1px rgba(255,255,255,0.6);
+            margin-top: 25px;
+        }
+
+        .main-button:hover, .shop-button:hover, .buy-heart-btn:hover {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.55), 0 0 18px rgba(255,255,255,0.75);
+        }
+
+        /* Panier - POSITION MOBILE FIX */
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(20px);
+            padding: 12px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-size: clamp(0.8rem, 3vw, 0.85rem);
+            z-index: 999;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .cart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(255,43,133,0.4);
+        }
+
+        .cart-count {
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            position: absolute;
+            top: -2px;
+            right: -2px;
+        }
+
+        /* Boutique responsive */
+        .shop-section {
+            display: none;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,255,255,0.08));
+            border-radius: 20px;
+            padding: clamp(20px, 8vw, 25px) clamp(15px, 6vw, 20px);
+            margin-top: 20px;
+            border: 1px solid rgba(255,215,0,0.4);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .shop-section.show {
+            display: block;
+        }
+
+        .shop-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.4rem, 6vw, 1.8rem);
+            color: var(--rose);
+            margin: 0 0 clamp(10px, 4vw, 15px) 0;
+            text-shadow: 0 0 15px rgba(255,215,0,0.6);
+        }
+
+        .heart-sale {
+            width: clamp(70px, 20vw, 80px);
+            height: clamp(60px, 18vw, 70px);
+            margin: clamp(10px, 4vw, 15px) auto;
+            position: relative;
+        }
+
+        .heart-sale::before,
+        .heart-sale::after {
             content: "";
             position: absolute;
             width: 50%;
             height: 80%;
             background: linear-gradient(135deg, #ff4b5c, #ff2b85);
             border-radius: 50px 50px 0 0;
-            box-shadow: 0 0 10px rgba(0,0,0,0.4);
-        }
-
-        .heart-broken::before {
             left: 50%;
-            transform: translateX(-50%) rotate(-45deg);
-            transform-origin: 0 100%;
+            top: 5%;
+            transform-origin: center bottom;
+            box-shadow: 0 0 15px rgba(255,75,92,0.6);
         }
 
-        .heart-broken::after {
-            right: 50%;
-            transform: translateX(50%) rotate(45deg);
-            transform-origin: 100% 100%;
+        .heart-sale::before {
+            transform: translateX(-55%) rotate(-45deg);
+            animation: sale-crack 2s ease-in-out infinite;
         }
 
-        .heart-broken::after {
-            box-shadow: inset -2px 0 0 rgba(0,0,0,0.35);
+        .heart-sale::after {
+            transform: translateX(35%) rotate(45deg);
+            animation: sale-crack 2s ease-in-out infinite reverse;
         }
 
-        /* Cœur réparé (après) */
-        .heart-fixed {
-            opacity: 0;
-            filter: drop-shadow(0 0 8px rgba(255,105,180,0.8));
-            animation: heartbeat 1.1s ease-in-out infinite;
+        @keyframes sale-crack {
+            0%, 50% { transform: translateX(-55%) rotate(-45deg) scale(1); }
+            25% { transform: translateX(-60%) rotate(-47deg) scale(1.05); }
         }
 
-        .heart-fixed::before,
-        .heart-fixed::after {
-            content: "";
-            position: absolute;
-            width: 50%;
-            height: 80%;
-            background: linear-gradient(135deg, #ff2b85, #ff8fb7);
-            border-radius: 50px 50px 0 0;
+        .sale-price {
+            color: var(--gold);
+            font-size: clamp(1.1rem, 5vw, 1.3rem);
+            font-weight: 700;
+            margin: clamp(8px, 3vw, 10px) 0;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
         }
 
-        .heart-fixed::before {
-            left: 50%;
-            transform: translateX(-50%) rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .heart-fixed::after {
-            right: 50%;
-            transform: translateX(50%) rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        /* Bouton */
-        .main-button {
-            background: linear-gradient(135deg, #ffffff, #ffe5f1);
-            color: #e84393;
-            border: none;
-            padding: 12px 30px;
-            font-size: 0.95rem;
-            border-radius: 999px;
-            font-weight: 600;
-            box-shadow:
-                0 12px 30px rgba(0,0,0,0.45),
-                0 0 0 1px rgba(255,255,255,0.6);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-button span {
-            position: relative;
-            z-index: 2;
-        }
-
-        .main-button::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(120deg, rgba(255,43,133,0.16), rgba(255,255,255,0.65), rgba(255,43,133,0.16));
-            transform: translateX(-100%);
-            transition: transform 0.7s ease;
-        }
-
-        .main-button:hover::before {
-            transform: translateX(0);
-        }
-
-        .main-button:hover {
-            transform: translateY(-1px) scale(1.03);
-            box-shadow:
-                0 18px 40px rgba(0,0,0,0.55),
-                0 0 18px rgba(255,255,255,0.75);
-            filter: saturate(115%);
-        }
-
-        /* Contenu lettre */
+        /* Lettre - SCROLL MOBILE */
         .letter-content {
             display: none;
             background: radial-gradient(circle at top, rgba(0,0,0,0.45), rgba(0,0,0,0.7));
-            padding: 18px 15px 20px;
+            padding: clamp(15px, 6vw, 18px) clamp(12px, 5vw, 15px) clamp(18px, 7vw, 20px);
             border-radius: 18px;
             margin-top: 22px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.15);
             position: relative;
             overflow: hidden;
-        }
-
-        .letter-content::before {
-            content: "";
-            position: absolute;
-            inset: -30%;
-            background:
-                radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 55%),
-                radial-gradient(circle at bottom right, rgba(255,255,255,0.05), transparent 55%);
-            pointer-events: none;
-            opacity: 0.75;
+            max-height: 60vh;
+            overflow-y: auto;
         }
 
         .letter-content.visible {
             animation: fade-up 0.75s ease-out;
         }
 
-        .letter-content p {
-            position: relative;
-            z-index: 1;
-        }
-
-        .letter-content hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-            margin: 18px auto;
-            width: 64%;
-        }
-
-        .highlight {
-            color: #ffeaa7;
-            font-weight: 700;
-            text-decoration: underline;
-            text-decoration-color: rgba(255,234,167,0.75);
-        }
-
-        .funny-quote {
-            position: relative;
-            z-index: 1;
-            background: #ffeaa7;
-            color: #d35400;
-            transform: rotate(-1.8deg);
-            padding: 14px 16px;
-            border-radius: 10px;
-            font-weight: 600;
-            box-shadow: 0 10px 22px rgba(0,0,0,0.5);
-            margin: 20px 0;
-            font-size: 0.9rem;
-        }
-
-        .funny-gif,
-        .user-image {
+        /* Images responsive */
+        .funny-gif, .user-image {
             max-width: 100%;
+            height: auto;
             border-radius: 16px;
             margin: 14px auto;
             display: block;
             box-shadow: 0 8px 20px rgba(0,0,0,0.45);
-            position: relative;
-            z-index: 1;
+            max-height: 150px;
+            object-fit: cover;
         }
 
-        .small-gif {
-            max-width: 135px;
-            border-radius: 999px;
+        .small-gif { 
+            max-width: clamp(100px, 30vw, 135px); 
+            border-radius: 999px; 
         }
 
-        .user-image {
-            max-width: 155px;
-            border: 2px solid rgba(255,255,255,0.7);
-            transform: rotate(-3deg);
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-
-        .user-image:hover {
-            transform: rotate(0deg) scale(1.03);
-            box-shadow:
-                0 16px 30px rgba(0,0,0,0.6),
-                0 0 16px rgba(255,255,255,0.55);
-        }
-
-        .signature {
-            text-align: right;
-            margin-top: 22px;
-            font-style: italic;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Pluie d'emojis */
-        .falling-item {
+        /* Popup notification - MOBILE CENTER */
+        .broken-popup {
             position: fixed;
-            top: -10vh;
-            animation: fall 4.5s linear forwards;
-            z-index: 90;
-            pointer-events: none;
-            text-shadow: 0 0 6px rgba(0,0,0,0.7);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #ff4b5c, #ff2b85);
+            color: white;
+            padding: clamp(20px, 12vw, 25px) clamp(18px, 8vw, 20px);
+            border-radius: 20px;
+            font-size: clamp(1rem, 4.5vw, 1.1rem);
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(255,75,92,0.5);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1001;
+            max-width: 90vw;
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-12vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            60% {
-                transform: translateY(70vh) translateX(10px) rotate(180deg);
-            }
-            100% {
-                transform: translateY(110vh) translateX(-18px) rotate(340deg);
-                opacity: 0;
-            }
+        .broken-popup.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
         }
 
-        /* Animations */
-        @keyframes fade-up {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .broken-emoji {
+            font-size: clamp(3rem, 15vw, 4rem);
+            display: block;
+            margin-bottom: clamp(8px, 4vw, 12px);
+            animation: shake 0.6s ease-in-out;
         }
 
-        @keyframes card-in {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.97);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+        /* ANIMATIONS OPTIMISÉES MOBILE */
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: rgba(255,255,255,0.8); } }
+        @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes card-in { from { opacity: 0; transform: translateY(40px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes heartbeat { 0% { transform: scale(1); } 25% { transform: scale(1.12); } 40% { transform: scale(0.99); } 60% { transform: scale(1.14); } 100% { transform: scale(1); } }
+        @keyframes float-dot { 0% { transform: translateY(0) translateX(0); opacity: 0.4; } 50% { transform: translateY(-12px) translateX(8px); opacity: 0.9; } 100% { transform: translateY(4px) translateX(-6px); opacity: 0.3; } }
+        @keyframes pulse-glow { 0% { transform: scale(0.9); opacity: 0.6; } 100% { transform: scale(1.05); opacity: 0.9; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0) rotate(0); } 20% { transform: translateX(-10px) rotate(-3deg); } 40% { transform: translateX(10px) rotate(3deg); } 60% { transform: translateX(-4px) rotate(-1deg); } 80% { transform: translateX(4px) rotate(1deg); } }
 
-        @keyframes heartbeat {
-            0%   { transform: scale(1); }
-            25%  { transform: scale(1.12); }
-            40%  { transform: scale(0.99); }
-            60%  { transform: scale(1.14); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes float-dot {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0.4;
-            }
-            50% {
-                transform: translateY(-12px) translateX(8px);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(4px) translateX(-6px);
-                opacity: 0.3;
-            }
-        }
-
-        @keyframes pulse-glow {
-            0% {
-                transform: scale(0.9);
-                opacity: 0.6;
-            }
-            100% {
-                transform: scale(1.05);
-                opacity: 0.9;
-            }
-        }
-
-        /* Cœur réparé */
-        .heart-wrapper.healed .heart-broken {
-            animation: fadeOutBroken 0.7s ease forwards;
-        }
-
-        .heart-wrapper.healed .heart-fixed {
-            animation: fadeInFixed 0.9s ease forwards, heartbeat 1.1s ease-in-out infinite;
-        }
-
-        @keyframes fadeOutBroken {
-            to {
-                opacity: 0;
-                transform: translateY(10px) scale(0.8);
-            }
-        }
-
-        @keyframes fadeInFixed {
-            from {
-                opacity: 0;
-                transform: translateY(-8px) scale(0.7);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* Responsive */
+        /* MOBILE SPECIFIC */
         @media (max-width: 480px) {
-            .container {
-                padding: 22px 16px 20px;
+            body { padding: 15px 10px; }
+            .container { 
+                padding: 20px 15px 18px; 
                 border-radius: 20px;
+                margin: 0 auto;
+                max-height: 95vh;
             }
-            h1 {
-                font-size: 2.2rem;
+            .cart { 
+                top: 15px; 
+                right: 15px; 
+                padding: 10px 12px; 
+                font-size: 0.8rem; 
             }
-            .typewriter {
-                font-size: 0.9rem;
+            .letter-content { 
+                max-height: 50vh; 
+                padding: 15px 12px 18px;
+                margin-top: 15px;
             }
-            p {
-                font-size: 0.9rem;
-            }
+            h1 { font-size: 2.2rem; margin-bottom: 10px; }
         }
+
+        /* NO SCROLLBAR MOBILE */
+        .letter-content::-webkit-scrollbar { width: 4px; }
+        .letter-content::-webkit-scrollbar-track { background: transparent; }
+        .letter-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
     </style>
 </head>
 <body>
-
     <div class="glow-orb"></div>
-
     <div id="falling-container"></div>
 
+    <!-- Panier -->
+    <div class="cart" id="cart">
+        <div id="cart-count" class="cart-count">0</div>🛒
+    </div>
+
+    <!-- Notification -->
+    <div id="broken-popup" class="broken-popup">
+        <div class="broken-emoji">💔</div>
+        <strong>ATTENTION !</strong><br>
+        Ce cœur est <strong>BRISÉ</strong><br>
+        matle nave3 w latle vem😢 w moulah mrag 7aytek
+    </div>
+
     <div class="container">
-        <!-- Lumières flottantes -->
         <div class="floating-dot"></div>
         <div class="floating-dot"></div>
         <div class="floating-dot"></div>
@@ -519,113 +435,181 @@
 
         <h1>Emaliii...</h1>
 
-        <!-- EFFET PARDON #1: Typewriter -->
         <div class="typewriter">
             <span>Je suis vraiment désolé...</span>
         </div>
 
         <img src="img.JPG" alt="Funny sheep" class="funny-gif small-gif">
 
-        <p class="intro">last time</p>
+        <p class="intro">knt ndor last chance</p>
 
-        <!-- EFFET PARDON #2: Cœur cassé -->
         <div class="heart-wrapper">
             <div class="heart-beat heart-broken"></div>
             <div class="heart-beat heart-fixed"></div>
         </div>
 
         <button class="main-button" onclick="revealLetter()">
-            <span>b 5navrek zeyn 💌</span>
+            <span>clique 💌</span>
         </button>
 
+        <!-- LETTRE ORIGINALE -->
         <div class="letter-content" id="letter">
             <p style="font-style: italic;">"nveg3i yelli nehwak ... 7atte mebya8 klak"</p>
             <p style="font-style: italic;">"gouli 3nk ma9lak ... menveg3a bik w bik"</p>
-            <p style="font-style: italic;">"nveg3i me5alak ... 3andk ane nra8ik"</p>
+            <p style="font-style: italic;">"nveg3i me5alak ... bikeli knt 3andk ane nra8ik"</p>
 
             <hr>
 
-            <p><span class="highlight">Dorini ne9ne6 </span></p>
+            <p><span class="highlight" style="color: #ffeaa7; font-weight: 700; text-decoration: underline; text-decoration-color: rgba(255,234,167,0.75);">Dorini ne9ne6 w rahi 5elget </span></p>
+            <p>9er knt dorek t36ini chance neprouvilk b mes actions</p>
 
-            <p> 9er knt dorek t36ini chance neprouvilk b mes actions</p>
-
-            <!-- EFFET PARDON #3: Phrase claire -->
             <p style="margin-top:10px;">
-                je t’ai blessée 9er <span class="highlight">sem7ili</span>… 
-                knt ndor nrépari chaque petit morceau de ton cœur doucement
+                je t'ai blessée w <span class="highlight">sem7ili ni insisteyt </span>... 
+                knt ndor nrépari chaque petit morceau de ton cœur doucement 
             </p>
 
             <p>ولربما انقطعت رسائلنا  ... ولربما انقطعت هدايانا</p>
             <p>مهما غلونا في عداوتنا... فالحب أكبر من خطايانا</p>
 
-            <div class="funny-quote">
+            <div class="funny-quote" style="background: #ffeaa7; color: #d35400; transform: rotate(-1.8deg); padding: 14px 16px; border-radius: 10px; font-weight: 600; box-shadow: 0 10px 22px rgba(0,0,0,0.5); margin: 20px 0; font-size: 0.9rem; position: relative; z-index: 1;">
                 "lahi n7awel n3adelek li dori w desole pour tout" 
             </div>
 
             <img src="img1.JPG" alt="Hug" class="funny-gif small-gif">
 
-            <p class="signature">
-                neb9ik 
-<br>yacoub
+            <p class="signature" style="text-align: right; margin-top: 22px; font-style: italic; font-weight: 600; position: relative; z-index: 1;">
+                 <br>yacoub
             </p>
 
             <img src="image_amal.jpg" alt="Carte Amal" class="user-image">
+
+            <button class="shop-button" onclick="showShop()" style="margin-top: 5px;">
+                🛒 Aller à la boutique
+            </button>
+        </div>
+
+        <!-- Boutique -->
+        <div class="shop-section" id="shop-section">
+            <h3 class="shop-title">nbi3 Galbi</h3>
+            
+            <div class="heart-sale"></div>
+            
+            <div class="sale-price">GRATUIT</div>
+            <p style="font-size: clamp(0.85rem, 3.5vw, 0.9rem); opacity: 0.9; margin: clamp(8px, 3vw, 10px) 0;">
+                Cœur sincère ...
+            </p>
+            
+            <button class="buy-heart-btn" onclick="buyBrokenHeart()">
+                ➕ Ajouter au panier
+            </button>
         </div>
     </div>
 
     <script>
+        let cartCount = 0;
+        
+        function updateCartCount() {
+            const countEl = document.getElementById('cart-count');
+            if (countEl) countEl.textContent = cartCount;
+        }
+        
         function revealLetter() {
             const letter = document.getElementById('letter');
             const btn = document.querySelector('.main-button');
             const intro = document.querySelector('.intro');
-            const firstGif = document.querySelector('.container > img');
+            const firstGif = document.querySelector('.container img');
             const heartWrapper = document.querySelector('.heart-wrapper');
 
-            letter.style.display = 'block';
-            letter.classList.add('visible');
+            if (letter) letter.style.display = 'block';
+            if (letter) letter.classList.add('visible');
 
             if (btn) btn.style.display = 'none';
             if (intro) intro.style.display = 'none';
             if (firstGif) firstGif.style.display = 'none';
 
-            // Répare le cœur
-            if (heartWrapper) {
-                heartWrapper.classList.add('healed');
-            }
+            if (heartWrapper) heartWrapper.classList.add('healed');
 
             setTimeout(() => {
-                letter.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (letter) letter.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 200);
 
-            // Pluie d'emojis pardon
             createFallingItems(true);
         }
-
+        
+        function showShop() {
+            const shop = document.getElementById('shop-section');
+            const shopBtn = document.querySelector('.shop-button');
+            if (shop) shop.classList.add('show');
+            if (shopBtn) shopBtn.style.display = 'none';
+            createFallingItems(false);
+            setTimeout(() => {
+                shop.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+        }
+        
+        function buyBrokenHeart() {
+            playBrokenSound();
+            const popup = document.getElementById('broken-popup');
+            if (popup) popup.classList.add('show');
+            cartCount = 0;
+            updateCartCount();
+            setTimeout(() => {
+                if (popup) popup.classList.remove('show');
+            }, 4000);
+        }
+        
+        function playBrokenSound() {
+            if (!window.AudioContext) return;
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(110, audioContext.currentTime + 0.15);
+                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.25);
+            } catch(e) {}
+        }
+        
         function createFallingItems(isApology = false) {
-            const emojis = isApology
-                ? ['🙏', '💔', '💗', '🥺', '❤️', '🌹']
-                : ['❤️', '💖', '🐑', '💕', '💘', '✨'];
-
-            const total = 45;
-
+            const emojis = isApology ? ['🙏','💔','💗','🥺','❤️','🌹'] : ['❤️','💖','🛒','💕','💘','✨'];
+            const total = 30; // Réduit pour mobile
             for (let i = 0; i < total; i++) {
                 setTimeout(() => {
                     const item = document.createElement('div');
-                    item.classList.add('falling-item');
+                    item.style.cssText = `
+                        position: fixed; top: -10vh; left: ${Math.random() * 100}vw;
+                        animation: fall 4.5s linear forwards; z-index: 90; pointer-events: none;
+                        font-size: ${Math.random() * 10 + 16}px; text-shadow: 0 0 6px rgba(0,0,0,0.7);
+                    `;
                     item.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                    item.style.left = Math.random() * 100 + 'vw';
-                    item.style.animationDuration = (Math.random() * 1.8 + 3.2) + 's';
-                    const size = Math.random() * 18 + 18;
-                    item.style.fontSize = size + 'px';
-
+                    item.className = 'falling-item';
                     document.body.appendChild(item);
-
-                    setTimeout(() => {
-                        item.remove();
-                    }, 5200);
-                }, i * 130);
+                    setTimeout(() => item.remove(), 5000);
+                }, i * 150);
             }
         }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            document.getElementById('cart').onclick = function(e) {
+                e.preventDefault();
+                alert('💔 Panier vide!cœur matle nave3 lchi w matle vem g3😢');
+            };
+        });
     </script>
+
+    <style>
+        @keyframes fall {
+            0% { transform: translateY(-12vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            60% { transform: translateY(70vh) translateX(10px) rotate(180deg); }
+            100% { transform: translateY(110vh) translateX(-18px) rotate(340deg); opacity: 0; }
+        }
+    </style>
 </body>
 </html>
